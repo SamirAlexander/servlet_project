@@ -9,7 +9,7 @@ public class Medico {
   private String dependencia;
   private String documentoIdentidad;
   private String horarioTrabajo;
-  private Integer idMedico; // Puede ser null
+  private String idMedico; // Puede ser null
   private String noConsultorio;
   private String nombre;
   private String numeroLicencia;
@@ -19,7 +19,7 @@ public class Medico {
   public Medico() {}
 
   public Medico(String apellido, String areaEspecializacion, String contraseña, String correo, 
-                 String dependencia, String documentoIdentidad, String horarioTrabajo, Integer idMedico, 
+                 String dependencia, String documentoIdentidad, String horarioTrabajo, String idMedico, 
                  String noConsultorio, String nombre, String numeroLicencia, String rol, String telefono) {
       this.apellido = apellido;
       this.areaEspecializacion = areaEspecializacion;
@@ -60,8 +60,8 @@ public class Medico {
   public String getHorarioTrabajo() { return horarioTrabajo; }
   public void setHorarioTrabajo(String horarioTrabajo) { this.horarioTrabajo = horarioTrabajo; }
 
-  public Integer getIdMedico() { return idMedico; }
-  public void setIdMedico(Integer idMedico) { this.idMedico = idMedico; }
+  public String getIdMedico() { return idMedico; }
+  public void setIdMedico(String idMedico) { this.idMedico = idMedico; }
 
   public String getNoConsultorio() { return noConsultorio; }
   public void setNoConsultorio(String noConsultorio) { this.noConsultorio = noConsultorio; }
