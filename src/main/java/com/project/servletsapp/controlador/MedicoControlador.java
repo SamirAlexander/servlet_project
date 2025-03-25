@@ -3,6 +3,7 @@ package com.project.servletsapp.controlador;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,12 +27,13 @@ public class MedicoControlador extends HttpServlet {
         } else {
             switch (accion) {
                 case "editar":
-                    // Implementar lógica de edición
-                    
+                    ObtenerMedico(request, response); // Implementar lógica de edición
                     break;
                 case "eliminar":
-                    // Implementar lógica de eliminación
                     eliminarMedico(request, response);
+                    break;
+                case "editado":
+                    editarMedico(request, response);
                     break;
                 default:
                     listarMedicos(request, response);
@@ -44,11 +46,8 @@ public class MedicoControlador extends HttpServlet {
             throws ServletException, IOException {
         List<Medico> medicos = medicoDAO.listar();
         request.setAttribute("medicos", medicos);
-        System.out.println("Listando medicos..." + medicos);
         request.getRequestDispatcher("listar.jsp").forward(request, response);
     }
-
-  
 
     private void eliminarMedico(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -58,6 +57,85 @@ public class MedicoControlador extends HttpServlet {
         listarMedicos(request, response); // Refrescar la lista después de eliminar
     }
 
-    
+    private void ObtenerMedico(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("idUsuario"));
 
+        Medico medico = medicoDAO.getMedicoById(id);
+        request.setAttribute("medico", medico);
+        
+
+        request.getRequestDispatcher("editar.jsp").forward(request, response);
+    }
+
+    private void editarMedico(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        // Obtener el ID del médico a editar
+        System.out.println("YA ESTAMOS ESTAMOS EN EDITAR MEDICO");
+        
+
+        String idUsuario = request.getParameter("idUsuario_prueba");
+        System.out.println("ESTE ES EL ID EN CONTROLLER: " + idUsuario);
+        // Obtener los parámetros del formulario
+        String apellido = request.getParameter("apellido");
+        String areaEspecializacion = request.getParameter("areaEspecializacion");
+        String contraseña = request.getParameter("contraseña");
+        String correo = request.getParameter("correo");
+        String dependencia = request.getParameter("dependencia");
+        String documentoIdentidad = request.getParameter("documentoIdentidad");
+        String horarioTrabajo = request.getParameter("horarioTrabajo");
+        String idMedico = request.getParameter("idMedico");
+        String noConsultorio = request.getParameter("noConsultorio");
+        String nombre = request.getParameter("nombre");
+        String numeroLicencia = request.getParameter("numeroLicencia");
+        String rol = request.getParameter("rol");
+        String telefono = request.getParameter("telefono");
+        
+        System.out.println("ESTE ES EL APELLIDO EN CONTROLLER: " + apellido);
+        // Crear un objeto Medico con los datos obtenidos
+        Medico medico = new Medico(nombre, apellido, areaEspecializacion, contraseña, correo, dependencia,
+                documentoIdentidad, horarioTrabajo, idMedico, noConsultorio, numeroLicencia, rol, telefono);
+
+        // Llamar al método editarMedico en el DAO
+        boolean actualizado = medicoDAO.editarMedico(medico);
+
+        // Redirigir a la página adecuada según el resultado
+        String acceso = actualizado ? "listar.jsp" : "error.jsp";
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // Obtener los parámetros del formulario para agregar un médico
+        String apellido = request.getParameter("apellido");
+        String areaEspecializacion = request.getParameter("areaEspecializacion");
+        String contraseña = request.getParameter("contrasena");
+        String correo = request.getParameter("correo");
+        String dependencia = request.getParameter("dependencia");
+        String documentoIdentidad = request.getParameter("documentoIdentidad");
+        String horarioTrabajo = request.getParameter("horarioTrabajo");
+        String noConsultorio = request.getParameter("noConsultorio");
+        String nombre = request.getParameter("nombre");
+        String numeroLicencia = request.getParameter("numeroLicencia");
+        String rol = request.getParameter("rol");
+        String telefono = request.getParameter("telefono");
+        String idMedico = request.getParameter("idMedico");
+
+        // Crear un nuevo objeto Medico con los datos obtenidos
+        Medico medico = new Medico(apellido, areaEspecializacion, contraseña, correo, dependencia, documentoIdentidad,
+                horarioTrabajo, idMedico, noConsultorio, nombre, numeroLicencia, rol, telefono);
+
+        // Intentar agregar el nuevo médico a la base de datos
+        boolean agregado = medicoDAO.add(medico);
+
+        // Determinar a qué vista redirigir
+        String acceso = agregado ? "listar.jsp" : "error.jsp";
+
+        // Redirigir a la vista correspondiente
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
+    }
 }
