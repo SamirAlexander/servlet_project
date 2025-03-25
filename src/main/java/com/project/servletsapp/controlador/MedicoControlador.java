@@ -59,7 +59,7 @@ public class MedicoControlador extends HttpServlet {
 
     private void ObtenerMedico(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("idUsuario"));
+        int id = Integer.parseInt(request.getParameter("id"));
 
         Medico medico = medicoDAO.getMedicoById(id);
         request.setAttribute("medico", medico);
@@ -74,8 +74,7 @@ public class MedicoControlador extends HttpServlet {
         System.out.println("YA ESTAMOS ESTAMOS EN EDITAR MEDICO");
         
 
-        String idUsuario = request.getParameter("idUsuario_prueba");
-        System.out.println("ESTE ES EL ID EN CONTROLLER: " + idUsuario);
+        int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
         // Obtener los parámetros del formulario
         String apellido = request.getParameter("apellido");
         String areaEspecializacion = request.getParameter("areaEspecializacion");
@@ -89,15 +88,30 @@ public class MedicoControlador extends HttpServlet {
         String nombre = request.getParameter("nombre");
         String numeroLicencia = request.getParameter("numeroLicencia");
         String rol = request.getParameter("rol");
-        String telefono = request.getParameter("telefono");
+        String telefono = request.getParameter("telefono");  
         
-        System.out.println("ESTE ES EL APELLIDO EN CONTROLLER: " + apellido);
+        System.out.println("ID USUARIO: " + idUsuario);
+        System.out.println("APELLIDO: " + apellido);
+        System.out.println("AREA ESPECIALIZACION: " + areaEspecializacion);
+        System.out.println("CONTRASEÑA: " + contraseña);
+        System.out.println("CORREO: " + correo);
+        System.out.println("DEPENDENCIA: " + dependencia);
+        System.out.println("DOCUMENTO IDENTIDAD: " + documentoIdentidad);
+        System.out.println("HORARIO TRABAJO: " + horarioTrabajo);
+        System.out.println("ID MEDICO: " + idMedico);
+        System.out.println("NO CONSULTORIO: " + noConsultorio);
+        System.out.println("NOMBRE: " + nombre);
+        System.out.println("NUMERO LICENCIA: " + numeroLicencia);
+        System.out.println("ROL: " + rol);
+        System.out.println("TELEFONO: " + telefono);
+
+
+
         // Crear un objeto Medico con los datos obtenidos
-        Medico medico = new Medico(nombre, apellido, areaEspecializacion, contraseña, correo, dependencia,
-                documentoIdentidad, horarioTrabajo, idMedico, noConsultorio, numeroLicencia, rol, telefono);
+        Medico medico = new Medico(apellido, areaEspecializacion, contraseña, correo, dependencia, documentoIdentidad, horarioTrabajo, idMedico, noConsultorio, nombre, numeroLicencia, rol, telefono);
 
         // Llamar al método editarMedico en el DAO
-        boolean actualizado = medicoDAO.editarMedico(medico);
+        boolean actualizado = medicoDAO.editarMedico(medico, idUsuario);
 
         // Redirigir a la página adecuada según el resultado
         String acceso = actualizado ? "listar.jsp" : "error.jsp";
@@ -105,7 +119,7 @@ public class MedicoControlador extends HttpServlet {
         vista.forward(request, response);
     }
 
-    @Override
+   /*  @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -137,5 +151,5 @@ public class MedicoControlador extends HttpServlet {
         // Redirigir a la vista correspondiente
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
-    }
+    } */
 }

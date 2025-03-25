@@ -8,13 +8,14 @@
 </head>
 <body>
     <h1>Editar Médico</h1>
-    <form >
-        <input type="hidden" name="accion" value="editar">        
+    <form accion="MedicoControlador?accion=editado" method="get">
+        <input type="hidden" name="accion" value="editado">        
     
-        <input type="hidden" name="idMedico" value="${medico.idMedico}">
+        <label for="nombre">ID medico:</label>
+        <input type="text" name="idMedico" value="${medico.idMedico}">
         
         <label for="nombre">ID USUARIO:</label>
-        <input type="text" id="idUsuario" name="idUsuario_prueba" value="${medico.idUsuario}" required><br><br>
+        <input type="text" id="idUsuario" name="idUsuario" value="${medico.idUsuario}" required><br><br>
         
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value="${medico.nombre}" required><br><br>
@@ -54,8 +55,6 @@
 
                   
         <button type="submit" >Confirmar Edicion</button>
-        <a href='MedicoControlador?accion=editado'>Enviar Edicion</a>
-
     </form>
 
     <br>

@@ -115,10 +115,25 @@ public class MedicoDAO {
         return medico;
     };
 
-    public boolean editarMedico(Medico medico) {
-        String sql = "UPDATE medicos SET nombre = ?, apellido = ?, area_especializacion = ?, contraseña = ?, correo = ?, dependencia = ?, documento_identidad = ?, horario_trabajo = ?, no_consultorio = ?, numero_licencia = ?, rol = ?, telefono = ? id_medico = ?"
-            ;
+    public boolean editarMedico(Medico medico, int id) {
+        String sql = "UPDATE medicos SET nombre = ?, apellido = ?, area_especializacion = ?, contraseña = ?, correo = ?, dependencia = ?, documento_identidad = ?, horario_trabajo = ?, no_consultorio = ?, numero_licencia = ?, rol = ?, telefono = ?, id_medico = ? WHERE id_usuario=" + id;
         System.out.println("EDITAR DESDE DAO");
+        System.out.println("DESDE MEDICO-DAO NOMBRE" + medico.getNombre());
+        System.out.println("DESDE MEDICO-DAO APELLIDO" + medico.getApellido());
+        System.out.println("DESDE MEDICO-DAO AREA ESPECIALIZACION" + medico.getAreaEspecializacion());
+        System.out.println("DESDE MEDICO-DAO CONTRASEÑA" + medico.getContraseña());
+        System.out.println("DESDE MEDICO-DAO CORREO" + medico.getCorreo());
+        System.out.println("DESDE MEDICO-DAO DEPENDENCIA" + medico.getDependencia());
+        System.out.println("DESDE MEDICO-DAO DOCUMENTO IDENTIDAD" + medico.getDocumentoIdentidad());
+        System.out.println("DESDE MEDICO-DAO HORARIO TRABAJO" + medico.getHorarioTrabajo());
+        System.out.println("DESDE MEDICO-DAO NO CONSULTORIO" + medico.getNoConsultorio());
+        System.out.println("DESDE MEDICO-DAO NUMERO LICENCIA" + medico.getNumeroLicencia());
+        System.out.println("DESDE MEDICO-DAO ROL" + medico.getRol());
+        System.out.println("DESDE MEDICO-DAO TELEFONO" + medico.getTelefono());
+        System.out.println("DESDE MEDICO-DAO ID MEDICO" + medico.getIdMedico());
+        System.out.println("DESDE MEDICO-DAO ID USUARIO" + id);
+        
+        
         try {
             con = cn.getConexion();
             ps = con.prepareStatement(sql);
@@ -136,10 +151,10 @@ public class MedicoDAO {
             ps.setString(10, medico.getNumeroLicencia());
             ps.setString(11, medico.getRol());
             ps.setString(12, medico.getTelefono());
+            ps.setInt(13, Integer.parseInt(medico.getIdMedico()));
 
             // El ID del médico es el que se usa para localizar el registro que se va a
             // actualizar
-            ps.setString(13, medico.getIdMedico());
 
             // Ejecutar la actualización
             int rowsUpdated = ps.executeUpdate();
