@@ -117,22 +117,7 @@ public class MedicoDAO {
 
     public boolean editarMedico(Medico medico, int id) {
         String sql = "UPDATE medicos SET nombre = ?, apellido = ?, area_especializacion = ?, contraseña = ?, correo = ?, dependencia = ?, documento_identidad = ?, horario_trabajo = ?, no_consultorio = ?, numero_licencia = ?, rol = ?, telefono = ?, id_medico = ? WHERE id_usuario=" + id;
-        System.out.println("EDITAR DESDE DAO");
-        System.out.println("DESDE MEDICO-DAO NOMBRE" + medico.getNombre());
-        System.out.println("DESDE MEDICO-DAO APELLIDO" + medico.getApellido());
-        System.out.println("DESDE MEDICO-DAO AREA ESPECIALIZACION" + medico.getAreaEspecializacion());
-        System.out.println("DESDE MEDICO-DAO CONTRASEÑA" + medico.getContraseña());
-        System.out.println("DESDE MEDICO-DAO CORREO" + medico.getCorreo());
-        System.out.println("DESDE MEDICO-DAO DEPENDENCIA" + medico.getDependencia());
-        System.out.println("DESDE MEDICO-DAO DOCUMENTO IDENTIDAD" + medico.getDocumentoIdentidad());
-        System.out.println("DESDE MEDICO-DAO HORARIO TRABAJO" + medico.getHorarioTrabajo());
-        System.out.println("DESDE MEDICO-DAO NO CONSULTORIO" + medico.getNoConsultorio());
-        System.out.println("DESDE MEDICO-DAO NUMERO LICENCIA" + medico.getNumeroLicencia());
-        System.out.println("DESDE MEDICO-DAO ROL" + medico.getRol());
-        System.out.println("DESDE MEDICO-DAO TELEFONO" + medico.getTelefono());
-        System.out.println("DESDE MEDICO-DAO ID MEDICO" + medico.getIdMedico());
-        System.out.println("DESDE MEDICO-DAO ID USUARIO" + id);
-        
+                
         
         try {
             con = cn.getConexion();

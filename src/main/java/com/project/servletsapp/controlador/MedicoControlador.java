@@ -89,23 +89,6 @@ public class MedicoControlador extends HttpServlet {
         String numeroLicencia = request.getParameter("numeroLicencia");
         String rol = request.getParameter("rol");
         String telefono = request.getParameter("telefono");  
-        
-        System.out.println("ID USUARIO: " + idUsuario);
-        System.out.println("APELLIDO: " + apellido);
-        System.out.println("AREA ESPECIALIZACION: " + areaEspecializacion);
-        System.out.println("CONTRASEÑA: " + contraseña);
-        System.out.println("CORREO: " + correo);
-        System.out.println("DEPENDENCIA: " + dependencia);
-        System.out.println("DOCUMENTO IDENTIDAD: " + documentoIdentidad);
-        System.out.println("HORARIO TRABAJO: " + horarioTrabajo);
-        System.out.println("ID MEDICO: " + idMedico);
-        System.out.println("NO CONSULTORIO: " + noConsultorio);
-        System.out.println("NOMBRE: " + nombre);
-        System.out.println("NUMERO LICENCIA: " + numeroLicencia);
-        System.out.println("ROL: " + rol);
-        System.out.println("TELEFONO: " + telefono);
-
-
 
         // Crear un objeto Medico con los datos obtenidos
         Medico medico = new Medico(apellido, areaEspecializacion, contraseña, correo, dependencia, documentoIdentidad, horarioTrabajo, idMedico, noConsultorio, nombre, numeroLicencia, rol, telefono);
